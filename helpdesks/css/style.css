@@ -35,7 +35,7 @@ body,.off-canvas-content{
 }
 
 .home:hover, .update:hover{
-     background-color: #2196f3;
+     background-color: #61b952;
 }
 
 .update{
@@ -230,4 +230,11 @@ td.butts button,table#txtHintHR .button {
     padding: 10px;
     text-align: center;
     margin-top: 2em;
+}
+
+
+.editRef{
+    background-color:#0c4d78;
+    color:#fff;
+    padding:10px;
 }

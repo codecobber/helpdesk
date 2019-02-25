@@ -1,11 +1,31 @@
  <?php 
-  $page = "create";
+
+  $page = "edit";
+  $gsDataPath = "";
 
   if(isset($_REQUEST['t'])){
     $ticketNoSent = htmlentities($_REQUEST['t']);
+    
   }
-  
+
   include('includes/header.inc.php'); 
+
+  if($_SESSION['pStatus'] == 'p1'){
+    $gsDataPath = get_theme_url(false).'/dataSearch/p1/data.json';
+    
+  }
+  else{
+    $gsDataPath = get_theme_url(false).'/dataSearch/p2/data.json';
+  }
+
+  //get the json data
+  $jsonData = json_decode(file_get_contents($gsDataPath));
+  $matchTicket = "";
+
+  
+
+
+
 ?>
 
 </head>
@@ -47,15 +67,52 @@
         <div id="bck_2" class="bck">
             <div id="block_2" class="row rowNo13">
                 <div class="large-6 columns">
-                <h2><?php get_page_title(); ?></h2>
-                <hr>
                 
-                
-    
                         <?php
                         // define variables and set to empty values
                         $titleErr = $datepickerErr = $timeErr = $impactErr = $emailErr = $ticketnoErr = $statusErr = $detailsErr = $ticktypeErr = "";
                         $ticketno = $time = $datepicker = $title = $email = $status =$impact = $details = $ticktype = "";
+                        ?>
+
+                        <h2><?php get_page_title(); ?></h2>
+                        <hr>
+                        
+
+                        <?php
+
+                        //Find a match in the data with the ticketNoSent
+                        foreach ($jsonData as $key => $value) {
+                          if($value->id == $ticketNoSent){
+                            $matchTicket =  $key; // hold a ref to the match
+                            echo "<p class='editRef'><b>Editing ticket no: " . strtoupper($ticketNoSent)."</b></p>";
+                            
+                            $timeFix = ($value->updated);
+                            $timeLen = strlen($timeFix);
+                            $timePos = stripos($timeFix, "(");
+                            $timeFixTime = substr($timeFix, $timePos+1,5);
+
+                              echo $_SESSION['pStatus'];
+                            
+                            if($_SESSION['pStatus'] == "p1"){
+                              $ticktype = 1;
+                            }
+                            elseif($_SESSION['pStatus'] == "p2"){
+                                $ticktype = 2;
+                            }
+                            
+
+                            $datepicker = substr($timeFix, 0,9);
+                            $ticketno = strtoupper($value->id);
+                            $time = $timeFixTime;
+                            $title = $value->title;
+                            $email = $value->email;
+                            $status = $value->status;
+                            $impact = $value->impact;
+                            $details = $value->details;
+                            
+
+                          }
+                        }
 
                        
 
@@ -224,7 +281,7 @@
                   <label style='display: inline;'>Ticket Status: </label>
                   
                   <input type="radio" name="status" <?php if (isset($status) && $status=="1") echo "checked";?> value="1">Red
-                  <input type="radio" name="status" <?php if (isset($status) && $status=="2") echo "checked";?> value="3">Green  
+                  <input type="radio" name="status" <?php if (isset($status) && $status=="2") echo "checked";?> value="2">Green  
                   <span class="form_error"> * <?php echo $statusErr;?></span>
                   <br><br><br> 
 

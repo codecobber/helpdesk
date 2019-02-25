@@ -1,6 +1,9 @@
- <?php include('includes/header.inc.php'); 
-$_SESSION['pStatus'] = "";
-$_SESSION['gsSitePath'] = get_site_url(false);
+ <?php 
+
+ include('includes/header.inc.php'); 
+ $_SESSION['pStatus'] = "";
+ $_SESSION['gsSitePath'] = get_site_url(false);
+ 
  ?>
 
 <script>

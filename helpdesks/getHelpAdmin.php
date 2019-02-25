@@ -1,6 +1,7 @@
 <?php
  session_start();
  
+ 
 /****************************************************
 *
 * @File:        gethint.php
@@ -37,6 +38,7 @@ function getLocData($ld){
             case 'p1':
                 return('dataSearch/p1/data.json');
             break;
+            
             case 'p2':
                 return('dataSearch/p2/data.json');
             break;
@@ -193,15 +195,16 @@ function getAvailableData($l){
 
 
 if(isset($_REQUEST['l']) && !empty($_REQUEST['l'])){
-
+    //get row data
     $l_input = htmlentities($_REQUEST['l']);
     
     $_SESSION['pStatus'] = $l_input;
+   
 
    
     getAvailableData($l_input);
 
-    echo $hint;
+    echo $hint . $_SESSION['pDataPath'];
 }
 else if(isset($_REQUEST['c']) && !empty($_REQUEST['c'])){
     //view data
