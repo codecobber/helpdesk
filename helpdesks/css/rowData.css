@@ -1,0 +1,138 @@
+/* Row Data CSS
+======================= */
+
+
+
+/* general margins */
+
+.rowNo01, .rowNo02, .rowNo03, .rowNo04,
+.rowNo05, .rowNo07, .rowNo11,
+.rowNo12, .rowNo13,.rowNo14,
+.rowNo15, .rowNo16, .rowNo17, .rowNo18, .rowNo19,
+.rowNo20, .rowNo21, .rowNo22, .rowNo23, .rowNo24,
+.rowNo25, .rowNo26, .rowNo27, .rowNo28, .rowNo29,
+.rowNo30, .rowNo31, .rowNo32, .rowNo36 {
+  padding-top: 2.5em;
+  padding-bottom: 2.5em;
+  float: none !important;
+}
+
+
+.rowNo03{
+  background-color:#444;
+  text-align: center;
+}
+
+.rowNo03 a{
+  color:#fff;
+}
+
+
+.rowNo04 a{
+  color:#fff;
+}
+
+
+.rowNo07 .column{
+  margin:20px 0;
+
+}
+
+.rowNo08, .rowNo39{
+  padding:0;
+  float: none !important;
+}
+
+.rowNo08 h1, .rowNo08 p, .rowNo39 h1, .rowNo39 p{
+  text-align: center;
+}
+
+
+.rowNo06, .rowNo09, .rowNo10, .rowNo33, .rowNo34, .rowNo35{
+  padding-top: 4em;
+  padding-bottom: 4em;
+  float: none !important;
+}
+
+.rowNo35 img{
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+}
+
+.rowNo35{
+  text-align: center;
+}
+
+.rowNo35 h3{
+  margin: 1em 0;
+}
+
+.rowNo26.signup-panel {
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  padding: 15px;
+  margin-top: 30px;
+}
+.rowNo26.signup-panel i {
+  font-size: 30px;
+  line-height: 50px;
+  color: #999;
+}
+.rowNo26.signup-panel form input, .rowNo26.signup-panel form span {
+  height: 50px;
+}
+.rowNo26.signup-panel .welcome {
+  font-size: 26px;
+  text-align: center;
+  margin-left: 0;
+}
+.rowNo26.signup-panel p {
+  font-size: 13px;
+  font-weight: 200;
+  margin-left: 25%;
+}
+.rowNo26.signup-panel .button {
+  margin-left: 35%;
+}
+
+.rowNo32{
+  text-align: center;
+}
+.rowNo32 ul, ul.icons{
+  list-style-type: none;
+}
+.rowNo32 li{
+  display: inline;
+}
+
+
+
+
+
+
+
+/* == Additional ==  */
+
+ul.icons li{
+  display:inline;
+}
+
+
+.parallaxBase {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.parallaxBase100 {
+    background-image: url(../img/mountains.jpg);
+    height: 100%;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
