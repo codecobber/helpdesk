@@ -3,7 +3,7 @@
  include('includes/header.inc.php'); 
  $_SESSION['pStatus'] = "";
  $_SESSION['gsSitePath'] = get_site_url(false);
- 
+
  ?>
 
 <script>
@@ -90,42 +90,7 @@ function  showRows(loc){
 
 
 </script>
-</head>
 
-<body id="<?php get_page_slug(); ?>" >
-
-
-    <!-- SideNav content -->
-
-    <div id="mySidenav" class="sidenav">
-        <ul>
-            <?php get_navigation(return_page_slug()); ?>
-            <li><a class="editme" href="#">Edit</a></li>
-        </ul>
-    </div>
-
-    <div id="main" class="hide-for-medium">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-    </div>
-
-    <!-- ==================================================================================== -->
-
-
-   
-    <div id='start'>
-
-        <div class="row dashboard">
-            <div class="medium-7 columns"><span><img src="<?php get_theme_url(); ?>/img/nhs-24.png"></span><h1>Help Desk Dashboard</h1></div>
-            <div class="medium-5 columns">
-                <form id="location">
-                    <span>Select a preference: <i class="fas fa-hand-point-right"></i> </span>
-                    <input class="choices" id="p1" onclick ="showRows('p1')" type="radio" name="locationSet" value="0"> P1
-                    <input class="choices" id="p2" onclick ="showRows('p2')" type="radio" name="locationSet" value="1"> P2
-                </form>
-                <a class="button update" href="<?php echo get_site_url().'index.php?id=create-ticket' ?>">Create new ticket</a>
-            </div>
-            
-        </div>
 
         <hr>
         <div class="row" id="dashboardInfo">
@@ -133,20 +98,7 @@ function  showRows(loc){
                <h4>Welcome to the dashboard.</h4>
                <p>Please start by selecting your P1 or P2 preference from above. Once selected, you will be provided with a list showing each of the current issues.</p>
                
-               <strong>To read more about an issue</strong>
-               <p>Select the appropriate green 'open' button from any row. <br><button class='bookButt' style='border-radius:5px;background-color:green'><i class='far fa-folder-open'></i></button>
-               </p>
-
-               <strong>To edit an record</strong>
-               <p>
-                Select the grey 'edit' button from any row. <br><button style='border-radius:5px;background-color:#444'><i class='fas fa-pencil-alt'></i></button>
-               </p>
-
-              <strong>To delete an record</strong>
-               <p>
-                Select the red 'delete' button from any row. <br><button style='border-radius:5px;background-color:#ce3838'><i class='far fa-trash-alt'></i></button>
-               </p>
-               </p>
+               
             </div>
           
         </div>
@@ -196,35 +148,4 @@ function  showRows(loc){
             <hr>
         </div>
     <!-- Footer Partial -->
-    
-    <footer id="footer">
-        <div class="row footerTop">
-            <div class="small-6 text-center medium-6 large-6 columns">
-                <div class="copyright">
-                    &copy;<?php get_site_name(); ?><a href="<?php get_site_url(); ?>"></a>
-                </div>
-
-            </div>
-
-
-            <div class="small-6 medium-6 large-6  text-center columns">
-                <small><?php get_site_credits(); ?></small>
-            </div>
-        </div>
-            
-    </footer>
-    <?php get_footer(); ?>
-
-    <!-- Close footer partial -->
-
-
-
-    <script src="<?php get_theme_url(); ?>/js/vendor/what-input.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/vendor/foundation.min.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/app.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/slidePush.js"></script>
-    
-</body>
-
-</html>
-
+   <?php include('includes/footer.inc.php'); ?>

@@ -80,7 +80,57 @@
     <meta property="og:type" content="company" />
 
 
+    </head>
 
-    <!-- twitter code below -->
+<body id="<?php get_page_slug(); ?>" >
+
+
+    <!-- SideNav content -->
+
+    <div id="mySidenav" class="sidenav">
+        <ul>
+            <?php get_navigation(return_page_slug()); ?>
+            <li><a class="editme" href="#">Edit</a></li>
+        </ul>
+    </div>
+
+    <div id="main" class="hide-for-medium">
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+    </div>
+
+    <!-- ==================================================================================== -->
+
+
+   
+    <div id='start'>
+
+        <div class="row dashboard">
+            <div class="medium-7 columns"><span><img src="<?php get_theme_url(); ?>/img/nhs-24.png"></span><h1>Help Desk Dashboard <i class="fas fa-ticket-alt"></i></h1></div>
+            <div class="medium-5 columns">
+              <?php
+
+                if(get_page_slug(false) == 'index'){
+                  ?>
+                  <form id="location">
+                    <span>Select a preference: <i class="fas fa-hand-point-right"></i> </span>
+                    <input class="choices" id="p1" onclick ="showRows('p1')" type="radio" name="locationSet" value="0"> P1
+                    <input class="choices" id="p2" onclick ="showRows('p2')" type="radio" name="locationSet" value="1"> P2
+                  </form>
+
+               <?php } ?>
+                
+              
+            </div>
+            
+        </div>
+
+        <div class="row">
+            <div class="small-12 medium-12 columns">
+                <a class="button home" href="<?php echo get_site_url().'index.php?id=help'?>"><i class="fas fa-info-circle"></i> Help</a>
+                <a class="button update" href="<?php echo get_site_url().'index.php?id=create-ticket' ?>"><i class="fas fa-ticket-alt"></i> Create new ticket</a>
+                <a class="button home" href="<?php echo get_site_url();?>"><i class="fas fa-home"></i> Home</a>
+                
+            </div>
+        </div>
 
 

@@ -1,5 +1,11 @@
  <?php 
 
+if(!isset($_REQUEST['t'])){
+  $homePath = get_site_url(false);
+  header('Location: '.$homePath);
+}
+ 
+
   $page = "edit";
   $gsDataPath = "";
   $recordKey = "";
@@ -15,7 +21,7 @@
     $gsDataPath = get_theme_url(false).'/dataSearch/p1/data.json';
     
   }
-  else{
+  elseif($_SESSION['pStatus'] == 'p2'){
     $gsDataPath = get_theme_url(false).'/dataSearch/p2/data.json';
   }
 
@@ -29,39 +35,7 @@
 
 ?>
 
-</head>
 
-<body id="<?php get_page_slug(); ?>" >
-
-
-    <!-- SideNav content -->
-
-    <div id="mySidenav" class="sidenav">
-        <ul>
-            <?php get_navigation(return_page_slug()); ?>
-            <li><a class="editme" href="#">Edit</a></li>
-        </ul>
-    </div>
-
-    <div id="main" class="hide-for-medium">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-    </div>
-
-    <!-- ==================================================================================== -->
-
-
-    <!-- show for medium up -->
-
-    <div id='start'>
-
-        <div class="row dashboard">
-            <div class="medium-7 columns"><span><img src="<?php get_theme_url(); ?>/img/nhs-24.png"></span><h1>Help Desk Dashboard</h1></div>
-            <div class="medium-5 columns">
-                
-                <a class="button home" href="<?php echo get_site_url();?>"><i class="fas fa-home"></i> Home</a>
-            </div>
-            
-        </div>
         <hr>
 
 
@@ -91,8 +65,7 @@
                             //positional ref in the data object
 
                             $GLOBALS['recordKey'] = $key;
-                            echo "RC = ".$GLOBALS['recordKey'];
-
+                           
                             $matchTicket =  $key; // hold a ref to the match
                             echo "<p class='editRef'><b>Editing ticket no: " . strtoupper($ticketNoSent) . "<span> Type: ". strtoupper($_SESSION['pStatus']) . "</span></b></p>";
                             
@@ -134,7 +107,7 @@
                         }
 
 
-                        //Testing inputs ------------------------ 
+                        //Testing inputs from POST ------------------------ 
 
                         if ($_SERVER["REQUEST_METHOD"] == "POST"){
                           
@@ -224,36 +197,32 @@
                             $success ="<p id='success'>Ticket Edited Successfully</p>";
 
                             //save file
-
-                            echo "PStatus = ".$_SESSION['pStatus'];
-
-                            $filesLoc = "theme/helpdesks/dataSearch/".$_SESSION['pStatus']."/data.json";
-                            $dataFile = file_get_contents($filesLoc);
-                            $decodeJson = json_decode($dataFile);
+                            $filesLoc2 = "theme/helpdesks/dataSearch/".$_SESSION['pStatus']."/data.json";
+                            $dataFile2 = file_get_contents($filesLoc2);
+                            $decodeJson2 = json_decode($dataFile2);
 
                             
 
-                            foreach ($decodeJson as $jkey => $jvalue) {
+                            foreach ($decodeJson2 as $jkey => $jvalue) {
                             
                               if($jkey == $GLOBALS['recordKey']){
-                                //echo "<br>---record: " . $GLOBALS['recordKey'];
-                                $jvalue->id = $ticketno;
-                                $jvalue->updated = $datepicker." (".$time.")";
-                                $jvalue->title = $title;
-                                $jvalue->email = $email;
+                                $jvalue->id = strtolower($ticketno);
+                                $jvalue->updated = strtolower($datepicker." (".$time.")");
+                                $jvalue->title = strtolower($title);
+                                $jvalue->email = strtolower($email);
                                 $jvalue->details =$details;
-                                $jvalue->status = $status;
+                                $jvalue->status = strtolower($status);
                                 $jvalue->impact = $impact;
                               }
                             }
 
                             //save data - create new ticket
-                           
+                            
                             //decode and pretty print
-                            $jDataStr = json_encode($decodeJson,JSON_PRETTY_PRINT);
+                            $jDataStr2 = json_encode($decodeJson2,JSON_PRETTY_PRINT);
                             
                             //store the new data back to file
-                            file_put_contents($filesLoc,$jDataStr);
+                            file_put_contents($filesLoc2,$jDataStr2);
                           }
                       }
 
@@ -266,7 +235,7 @@
                 <p><span class="form_error">* Required fields</span></p>
                 <form id="ticketForm" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']);?>">  
                   
-                  <label style='display: inline;'>Date:</label>
+                  <label style='display: inline;'>Update Date:</label>
                   <span class="form_error"> * <?php echo $datepickerErr;?></span>
                   <input id="datepicker" style='display: inline;' type="text" name="datepicker" value="<?php echo $datepicker;?>">
                   
@@ -341,50 +310,4 @@
 
         </div>      
     </div>
-    <!-- Footer Partial -->
-
-    <footer id="footer">
-        <div class="row footerTop">
-            <div class="small-4 text-center medium-4 large-4 columns">
-                <div class="copyright">
-                    &copy;<?php get_site_name(); ?><a href="<?php get_site_url(); ?>"></a>
-                </div>
-
-            </div>
-
-
-            <div class="small-4 medium-4 large-4  text-center columns">
-                <small><?php get_site_credits(); ?></small>
-            </div>
-
-
-
-            <div class="small-4 show-for-medium medium-4 columns">
-                <ul class="icons">
-                    <li><a class="blockSec" id="cblocks" href="#"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
-                    </li>
-                    <li><a class="blockSec" id="fblocks" href="#"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a>
-                    </li>
-                    <li><a class="blockSec" id="iblocks" href="#"><i class="fa fa-pinterest-p fa-lg" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-            
-    </footer>
-    <?php get_footer(); ?>
-
-    <!-- Close footer partial -->
-
-
-
-    <script src="<?php get_theme_url(); ?>/js/vendor/what-input.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/vendor/foundation.min.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/app.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/slidePush.js"></script>
-
-    
-
-</body>
-
-</html>
+    <?php include('includes/footer.inc.php'); ?>

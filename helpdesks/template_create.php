@@ -3,39 +3,6 @@
   include('includes/header.inc.php'); 
 ?>
 
-</head>
-
-<body id="<?php get_page_slug(); ?>" >
-
-
-    <!-- SideNav content -->
-
-    <div id="mySidenav" class="sidenav">
-        <ul>
-            <?php get_navigation(return_page_slug()); ?>
-            <li><a class="editme" href="#">Edit</a></li>
-        </ul>
-    </div>
-
-    <div id="main" class="hide-for-medium">
-        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
-    </div>
-
-    <!-- ==================================================================================== -->
-
-
-    <!-- show for medium up -->
-
-    <div id='start'>
-
-        <div class="row dashboard">
-            <div class="medium-7 columns"><span><img src="<?php get_theme_url(); ?>/img/nhs-24.png"></span><h1>Help Desk Dashboard</h1></div>
-            <div class="medium-5 columns">
-                
-                <a class="button home" href="<?php echo get_site_url();?>"><i class="fas fa-home"></i> Home</a>
-            </div>
-            
-        </div>
         <hr>
 
 
@@ -191,7 +158,7 @@
                 <p><span class="form_error">* Required fields</span></p>
                 <form id="ticketForm" method="post" action="<?php echo htmlspecialchars($_SERVER['REQUEST_URI']);?>">  
                   
-                  <label style='display: inline;'>Date:</label>
+                  <label style='display: inline;'>Creation Date:</label>
                   <span class="form_error"> * <?php echo $datepickerErr;?></span>
                   <input id="datepicker" style='display: inline;' type="text" name="datepicker" value="<?php echo $datepicker;?>">
                   
@@ -209,6 +176,20 @@
     
                   <br><br>
 
+                  
+
+                  <label style='display: inline;'>Title: </label>
+                  <span class="form_error"> * <?php echo $titleErr;?></span>
+                  <input type="text" name="title" value="<?php echo $title;?>" maxlength="120">
+                  
+                  <br><br>
+
+                  <label style='display: inline;'>Ticket No: </label>
+                  <span class="form_error"> * <?php echo $ticketnoErr;?></span>
+                  <input type="text" name="ticketno" value="<?php echo $ticketno;?>" maxlength="15">
+                  
+                  <br><br>
+
                   <label style='display: inline;'>Ticket Type: </label>
                   
                   <input type="radio" name="ticktype" <?php if (isset($ticktype) && $ticktype=="1") echo "checked";?> value="1">P1
@@ -221,18 +202,6 @@
                   <input type="radio" name="status" <?php if (isset($status) && $status=="1") echo "checked";?> value="1">Red
                   <input type="radio" name="status" <?php if (isset($status) && $status=="2") echo "checked";?> value="3">Green  
                   <span class="form_error"> * <?php echo $statusErr;?></span>
-                  <br><br><br> 
-
-                  <label style='display: inline;'>Title: </label>
-                  <span class="form_error"> * <?php echo $titleErr;?></span>
-                  <input type="text" name="title" value="<?php echo $title;?>" maxlength="120">
-                  
-                  <br><br>
-
-                  <label style='display: inline;'>Ticket No: </label>
-                  <span class="form_error"> * <?php echo $ticketnoErr;?></span>
-                  <input type="text" name="ticketno" value="<?php echo $ticketno;?>" maxlength="15">
-                  
                   <br><br>
 
 
@@ -272,50 +241,4 @@
 
         </div>     
     </div>
-    <!-- Footer Partial -->
-
-    <footer id="footer">
-        <div class="row footerTop">
-            <div class="small-4 text-center medium-4 large-4 columns">
-                <div class="copyright">
-                    &copy;<?php get_site_name(); ?><a href="<?php get_site_url(); ?>"></a>
-                </div>
-
-            </div>
-
-
-            <div class="small-4 medium-4 large-4  text-center columns">
-                <small><?php get_site_credits(); ?></small>
-            </div>
-
-
-
-            <div class="small-4 show-for-medium medium-4 columns">
-                <ul class="icons">
-                    <li><a class="blockSec" id="cblocks" href="#"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a>
-                    </li>
-                    <li><a class="blockSec" id="fblocks" href="#"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a>
-                    </li>
-                    <li><a class="blockSec" id="iblocks" href="#"><i class="fa fa-pinterest-p fa-lg" aria-hidden="true"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-            
-    </footer>
-    <?php get_footer(); ?>
-
-    <!-- Close footer partial -->
-
-
-
-    <script src="<?php get_theme_url(); ?>/js/vendor/what-input.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/vendor/foundation.min.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/app.js"></script>
-    <script src="<?php get_theme_url(); ?>/js/slidePush.js"></script>
-
-    
-
-</body>
-
-</html>
+   <?php include('includes/footer.inc.php'); ?>

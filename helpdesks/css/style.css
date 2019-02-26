@@ -28,19 +28,18 @@ body,.off-canvas-content{
      background-color:#f7f7f7;
 }
 
-.home, .update, input[type ='submit']{
+.home, .update, .home, input[type ='submit']{
    float: right;
    background-color: #2b6782;
    border-radius:3px; 
+   margin:0 10px;
 }
 
 .home:hover, .update:hover{
      background-color: #61b952;
 }
 
-.update{
-    margin-top: 2.5em;
-}
+
 
 #txtHint tr:nth-child(even){background-color: #f2f2f2}
 
@@ -52,9 +51,8 @@ body,.off-canvas-content{
     text-align: left;
 }
 
-.dashboard{
-    margin-top: 2em;
-}
+
+
 
 .dashboard h1{
     padding-left: 2em;
@@ -96,6 +94,10 @@ body,.off-canvas-content{
 
 #dashboardInfo {
     margin-top: 5em;
+}
+
+#helpInfo{
+    margin-top: 2em;
 }
 
 button{
@@ -242,4 +244,12 @@ td.butts button,table#txtHintHR .button {
 .editRef span{
     float: right;
     margin-right: 2em;
+}
+
+.help h4{
+    margin-top: 3.1em;
+}
+
+.help p{
+    margin-top: 1.1em;
 }
