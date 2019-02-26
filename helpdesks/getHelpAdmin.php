@@ -204,7 +204,7 @@ if(isset($_REQUEST['l']) && !empty($_REQUEST['l'])){
    
     getAvailableData($l_input);
 
-    echo $hint . $_SESSION['pDataPath'];
+    echo $hint;
 }
 else if(isset($_REQUEST['c']) && !empty($_REQUEST['c'])){
     //view data

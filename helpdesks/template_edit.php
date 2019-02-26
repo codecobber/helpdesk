@@ -2,6 +2,7 @@
 
   $page = "edit";
   $gsDataPath = "";
+  $recordKey = "";
 
   if(isset($_REQUEST['t'])){
     $ticketNoSent = htmlentities($_REQUEST['t']);
@@ -83,15 +84,24 @@
                         //Find a match in the data with the ticketNoSent
                         foreach ($jsonData as $key => $value) {
                           if($value->id == $ticketNoSent){
+
+                          
+                            
+                            //save the key value as the element(ticket)
+                            //positional ref in the data object
+
+                            $GLOBALS['recordKey'] = $key;
+                            echo "RC = ".$GLOBALS['recordKey'];
+
                             $matchTicket =  $key; // hold a ref to the match
-                            echo "<p class='editRef'><b>Editing ticket no: " . strtoupper($ticketNoSent)."</b></p>";
+                            echo "<p class='editRef'><b>Editing ticket no: " . strtoupper($ticketNoSent) . "<span> Type: ". strtoupper($_SESSION['pStatus']) . "</span></b></p>";
                             
                             $timeFix = ($value->updated);
                             $timeLen = strlen($timeFix);
                             $timePos = stripos($timeFix, "(");
                             $timeFixTime = substr($timeFix, $timePos+1,5);
 
-                              echo $_SESSION['pStatus'];
+                            
                             
                             if($_SESSION['pStatus'] == "p1"){
                               $ticktype = 1;
@@ -127,7 +137,7 @@
                         //Testing inputs ------------------------ 
 
                         if ($_SERVER["REQUEST_METHOD"] == "POST"){
-
+                          
                           $checkFlag = 0;
 
                           if (empty($_POST["datepicker"])) {
@@ -143,7 +153,7 @@
                           } else {
                             $title = test_input($_POST["title"]);
                             // check if name only contains letters and whitespace
-                            if (!preg_match("/^[a-zA-Z ]*$/",$title)) {
+                            if (!preg_match("/^[a-zA-Z0-9 ]*$/",$title)) {
                               $titleErr = "Only letters and white space allowed"; 
                             }
                           }
@@ -208,33 +218,36 @@
                             $status = test_input($_POST["status"]);
                           }
 
-                          if (empty($_POST["ticktype"])) {
-                            $ticktypeErr = "Ticket type required";
-                            $checkFlag =1;
-                          } else {
-                            $ticktype = test_input($_POST["ticktype"]);
-                          }
+                          
 
                           if($checkFlag == 0){
-                            $success ="<p id='success'>Ticket created</p>";
+                            $success ="<p id='success'>Ticket Edited Successfully</p>";
 
                             //save file
+
+                            echo "PStatus = ".$_SESSION['pStatus'];
+
                             $filesLoc = "theme/helpdesks/dataSearch/".$_SESSION['pStatus']."/data.json";
                             $dataFile = file_get_contents($filesLoc);
                             $decodeJson = json_decode($dataFile);
 
+                            
+
+                            foreach ($decodeJson as $jkey => $jvalue) {
+                            
+                              if($jkey == $GLOBALS['recordKey']){
+                                //echo "<br>---record: " . $GLOBALS['recordKey'];
+                                $jvalue->id = $ticketno;
+                                $jvalue->updated = $datepicker." (".$time.")";
+                                $jvalue->title = $title;
+                                $jvalue->email = $email;
+                                $jvalue->details =$details;
+                                $jvalue->status = $status;
+                                $jvalue->impact = $impact;
+                              }
+                            }
+
                             //save data - create new ticket
-                            $newTicket->id = $ticketno;
-                            $newTicket->date = $datepicker;
-                            $newTicket->updated = $datepicker." (".$time.")";
-                            $newTicket->title = $title;
-                            $newTicket->email = $email;
-                            $newTicket->details =$details;
-                            $newTicket->status = $status;
-                            $newTicket->impact = $impact;
-             
-                            //add object to array
-                            array_push($decodeJson, $newTicket);
                            
                             //decode and pretty print
                             $jDataStr = json_encode($decodeJson,JSON_PRETTY_PRINT);
@@ -268,27 +281,8 @@
                   <label style='display: inline;'>E-mail: </label>
                   <span class="form_error"> * <?php echo $emailErr;?></span>
                   <input type="text" name="email" value="<?php echo $email;?>">
-    
                   <br><br>
-
-                  <label style='display: inline;'>Ticket Type: </label>
-                  
-                  <input type="radio" name="ticktype" <?php if (isset($ticktype) && $ticktype=="1") echo "checked";?> value="1">P1
-                  <input type="radio" name="ticktype" <?php if (isset($ticktype) && $ticktype=="2") echo "checked";?> value="2">P2
-                  <span class="form_error"> * <?php echo $ticktypeErr;?></span>
-                  <br><br> 
-
-                  <label style='display: inline;'>Ticket Status: </label>
-                  
-                  <input type="radio" name="status" <?php if (isset($status) && $status=="1") echo "checked";?> value="1">Red
-                  <input type="radio" name="status" <?php if (isset($status) && $status=="2") echo "checked";?> value="2">Green  
-                  <span class="form_error"> * <?php echo $statusErr;?></span>
-                  <br><br><br> 
-
-                  <label style='display: inline;'>Title: </label>
-                  <span class="form_error"> * <?php echo $titleErr;?></span>
-                  <input type="text" name="title" value="<?php echo $title;?>" maxlength="120">
-                  
+                  <hr>
                   <br><br>
 
                   <label style='display: inline;'>Ticket No: </label>
@@ -296,6 +290,19 @@
                   <input type="text" name="ticketno" value="<?php echo $ticketno;?>" maxlength="15">
                   
                   <br><br>
+
+                  <label style='display: inline;'>Title: </label>
+                  <span class="form_error"> * <?php echo $titleErr;?></span>
+                  <input type="text" name="title" value="<?php echo $title;?>" maxlength="120">
+                  
+                  <br><br>
+
+                  <label style='display: inline;'>Ticket Status: </label>
+                  
+                  <input type="radio" name="status" <?php if (isset($status) && $status=="1") echo "checked";?> value="1">Red
+                  <input type="radio" name="status" <?php if (isset($status) && $status=="2") echo "checked";?> value="2">Green  
+                  <span class="form_error"> * <?php echo $statusErr;?></span>
+                  <br><br><br>
 
 
                   <label style='display: inline;'>Ticket Details:</label>
@@ -332,7 +339,7 @@
 
             </div>
 
-        </div>     
+        </div>      
     </div>
     <!-- Footer Partial -->
 

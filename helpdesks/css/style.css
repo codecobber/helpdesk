@@ -238,3 +238,8 @@ td.butts button,table#txtHintHR .button {
     color:#fff;
     padding:10px;
 }
+
+.editRef span{
+    float: right;
+    margin-right: 2em;
+}
