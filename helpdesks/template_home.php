@@ -20,14 +20,17 @@ function viewMe(e){
 
         var issNo = e.getAttribute('id').replace("-view","");
         var issAction = e.getAttribute('data-action');
-
+       
         var xmlhttp3 = new XMLHttpRequest();
         xmlhttp3.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                document.getElementById("userData").innerHTML = this.responseText;
                 
+                //output the details to #userData
+                $('#userData').html(this.responseText);
+
                 if(issAction == "delete"){
                     showRows(currentFile);
+                    $('#deleteNotice').html(this.responseText);
                 }
             }
         };
@@ -120,7 +123,7 @@ function  showRows(loc){
                             </p>
                             <p><span>Details:</span></p>
                         </div>
-                        
+                        <div id="deleteNotice"></div>
 
                         
                         <h3 id="pSelection"></h3>

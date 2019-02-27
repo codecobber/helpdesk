@@ -49,7 +49,7 @@ function deleteDetails($delRef){
     
     $delData = getLocData($_SESSION['pStatus']);
     
-   
+    
 
     //convert to php array
     $jData = file_get_contents($delData);
@@ -59,6 +59,7 @@ function deleteDetails($delRef){
 
     foreach($jDataArr as $row){ 
         foreach ($row as $key => $value) {
+            $delRef = str_replace("-del", "", $delRef);
             if($key == "id" && $value == $delRef){
                 $counterMatch = $elementCount;
                 echo "<h3><i style='color:#ce3838;' class='fas fa-trash-alt'></i> Record: " .$value." now deleted!</h3>";
@@ -109,6 +110,7 @@ function showDetails($c){
 
         //check status colour
         $statusColour = checkStatus($row->status);
+        
         if($row->id == strtolower($c)){
 
             //check staus colour
@@ -199,8 +201,6 @@ if(isset($_REQUEST['l']) && !empty($_REQUEST['l'])){
     $l_input = htmlentities($_REQUEST['l']);
     
     $_SESSION['pStatus'] = $l_input;
-   
-
    
     getAvailableData($l_input);
 

@@ -129,6 +129,9 @@
                             $decodeJson = json_decode($dataFile);
 
                             //save data - create new ticket
+                            //stdClass is PHP's generic empty class
+                            $newTicket = new stdClass();
+
                             $newTicket->id = $ticketno;
                             $newTicket->date = $datepicker;
                             $newTicket->updated = $datepicker." (".$time.")";
