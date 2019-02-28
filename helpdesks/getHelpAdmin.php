@@ -4,7 +4,7 @@
  
 /****************************************************
 *
-* @File:        gethint.php
+* @File:        getHelpAdmin.php
 * @Function:    Retrieve array and search
 * @Author:      Craig Adams
 *
@@ -23,9 +23,9 @@ set_error_handler("customError");
 
 $hint = "<tr>
             <th>ID</th>
-            <th>Date</th>
+            <th>Created on</th>
+            <th>Updated on</th>
             <th>Title</th>
-            <th>Raised By</th>
             <th>Status</th>
             <th style='text-align:center;'>Options</th>
         </tr>";
@@ -123,8 +123,8 @@ function showDetails($c){
                     </tr>
                      
                     <tr>
-                        <th>Date created</th>
-                        <th>Last updated</th>
+                        <th>Created on</th>
+                        <th>Updated on</th>
                         <th>Title</th>
                         <th>Email</th>
                         <th>Status</th>
@@ -183,8 +183,8 @@ function getAvailableData($l){
                 <tr>
                     <td>".$row->id."</td>
                     <td>".$row->date."</td>
+                    <td>".$row->updated."</td>
                     <td>".$row->title."</td>
-                    <td>".$row->email."</td>
                     <td><span " .$statusColour . " class='statusColour'></span></td>";                    
                 
                 if ($_SESSION['userOnline'] == 1) { 

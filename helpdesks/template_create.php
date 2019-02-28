@@ -120,35 +120,58 @@
                             $ticktype = test_input($_POST["ticktype"]);
                           }
 
-                          if($checkFlag == 0){
-                            $success ="<p id='success'>Ticket created</p>";
 
+
+                          if($checkFlag == 0){
+                            
+                            $existsFlag = 0;
+
+                            
                             //save file
                             $filesLoc = "theme/helpdesks/dataSearch/".$_SESSION['pStatus']."/data.json";
                             $dataFile = file_get_contents($filesLoc);
                             $decodeJson = json_decode($dataFile);
 
-                            //save data - create new ticket
-                            //stdClass is PHP's generic empty class
-                            $newTicket = new stdClass();
-
-                            $newTicket->id = $ticketno;
-                            $newTicket->date = $datepicker;
-                            $newTicket->updated = $datepicker." (".$time.")";
-                            $newTicket->title = $title;
-                            $newTicket->email = $email;
-                            $newTicket->details =$details;
-                            $newTicket->status = $status;
-                            $newTicket->impact = $impact;
-             
-                            //add object to array
-                            array_push($decodeJson, $newTicket);
-                           
-                            //decode and pretty print
-                            $jDataStr = json_encode($decodeJson,JSON_PRETTY_PRINT);
                             
-                            //store the new data back to file
-                            file_put_contents($filesLoc,$jDataStr);
+                            //Loop through array and check for duplicate id
+                            foreach ($decodeJson as $skey => $svalue) {
+                               if($decodeJson[$skey]->id == $ticketno){
+                                $existsFlag = 1;
+                               }
+                             } 
+
+                            
+                             if($existsFlag == 0){
+
+                              $mymessage = "<p id='success'>Ticket created</p>";
+
+                              //save data - create new ticket
+                              //stdClass is PHP's generic empty class
+                              $newTicket = new stdClass();
+
+                              $newTicket->id = $ticketno;
+                              $newTicket->date = $datepicker." (".$time.")";
+                              $newTicket->updated = $datepicker." (".$time.")";
+                              $newTicket->title = $title;
+                              $newTicket->email = $email;
+                              $newTicket->details =$details;
+                              $newTicket->status = $status;
+                              $newTicket->impact = $impact;
+               
+                              //add object to array
+                              array_push($decodeJson, $newTicket);
+                             
+                              //decode and pretty print
+                              $jDataStr = json_encode($decodeJson,JSON_PRETTY_PRINT);
+                              
+                              //store the new data back to file
+                              file_put_contents($filesLoc,$jDataStr);
+                             }
+                             else{
+                              $mymessage = "<p id='success' style='background-color:#b33434'>Ticket ID already exists</p>";
+                             }
+
+                            
                           }
                       }
 
@@ -236,7 +259,7 @@
                 <p>The traffic lights notification is there to provide a visual indication of the progress of the ticket.</p>
                 <p>Initially, the ticket will be set to red as the issue is new and has not been dealt with. Later you can edit the status and change the colour accordingly. </p>
                 
-                <div><?php if(isset($success)){echo $success;} ?></div>
+                <div><?php if(isset($mymessage)){echo $mymessage;} ?></div>
 
                 </div>
 
