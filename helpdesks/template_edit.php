@@ -6,7 +6,7 @@ if(!isset($_REQUEST['t'])){
 }
  
 
-  $page = "edit";
+  
   $gsDataPath = "";
   $recordKey = "";
 

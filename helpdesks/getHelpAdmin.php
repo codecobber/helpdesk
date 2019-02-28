@@ -167,7 +167,7 @@ function getAvailableData($l){
 
     $ld = getLocData($l);
     $jsonData = json_decode(file_get_contents($ld));
-    
+    rsort($jsonData);
     
    
   
@@ -185,12 +185,24 @@ function getAvailableData($l){
                     <td>".$row->date."</td>
                     <td>".$row->title."</td>
                     <td>".$row->email."</td>
-                    <td><span " .$statusColour . " class='statusColour'></span></td>
-                    <td class='butts'>
+                    <td><span " .$statusColour . " class='statusColour'></span></td>";                    
+                
+                if ($_SESSION['userOnline'] == 1) { 
+                    $GLOBALS['hint'] .= "<td class='butts'>
                     <a onclick='viewMe(this)' id='".$row->id."-view' class='bookButt editPage button' data-user='".$row->id."' data-action = 'open' style='border-radius:5px;background-color:green'><i class='far fa-folder-open'></i></a>
-                    <a href='".$_SESSION['gsSitePath']."index.php?id=edit-ticket&t=".$row->id."' id='".$row->id."-edit' class='bookButt button' data-id='".$row->id."' data-action = 'edit' style='border-radius:5px;background-color:#444'><i class='fas fa-pencil-alt'></i></a>
+                    <a href='".$_SESSION['gsSitePath']."index.php?id=edit&t=".$row->id."' id='".$row->id."-edit' class='bookButt button' data-id='".$row->id."' data-action = 'edit' style='border-radius:5px;background-color:#444'><i class='fas fa-pencil-alt'></i></a>
                     <a onclick='viewMe(this)' id='".$row->id."-del' class='bookButt button' data-user='".$row->id."' data-action = 'delete' style='border-radius:5px;background-color:#ce3838'><i class='far fa-trash-alt'></i></a>
-                    </td>
+                    </td>";
+                }
+                else{
+
+                    $GLOBALS['hint'] .= "<td class='butts'>
+                    <a onclick='viewMe(this)' id='".$row->id."-view' class='bookButt editPage button' data-user='".$row->id."' data-action = 'open' style='border-radius:5px;background-color:green'><i class='far fa-folder-open'></i></a>
+                    </td>";
+                }
+
+
+                $GLOBALS['hint'] .= "    
                 </tr>"; // Slot number 1 for each array 
         }
 }

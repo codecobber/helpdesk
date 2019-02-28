@@ -2,16 +2,26 @@
  session_start();
 
  if(!defined('IN_GS')){ die('you cannot load this page directly.'); }
+ 
+ $page = get_page_slug(false);
 
+ if(null !== get_cookie('GS_ADMIN_USERNAME')){
+    $userOnline = 1;
+    $_SESSION['userOnline'] = 1;
+ }
+ else{
+    $userOnline = 0;
+    $_SESSION['userOnline'] = 0;
+ }
+ 
 ?>
 
 <!doctype html>
 
 <!--
 =============================================
-  Developed by Code Cobber for your enjoyment
-  http://www.codecobber.co.uk
-  Free for personal and commercial use under the CCA 4.0 license:  (see www.codecobber.co.uk/license)
+  Developed by Code Cobber
+  https://www.codecobber.co.uk
 =============================================
 -->
 
@@ -31,11 +41,12 @@
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/effects.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/push.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/foundation.css" />
-    <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/app.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/myCss.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/rowData.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/style.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/animate.css" />
+
+    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
 
 
     <!-- Google Fonts -->
@@ -50,7 +61,7 @@
 
    <?php
    if(isset($page)){
-      if($page == "create"){
+      if($page == "create" || $page == "edit"){
     ?>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -109,7 +120,7 @@
             <div class="medium-5 columns">
               <?php
 
-                if(get_page_slug(false) == 'index'){
+                if($page == 'index'){
                   ?>
                   <form id="location">
                     <span>Select a preference: <i class="fas fa-hand-point-right"></i> </span>
@@ -126,10 +137,17 @@
 
         <div class="row">
             <div class="small-12 medium-12 columns">
-                <a class="button home" href="<?php echo get_site_url().'index.php?id=help'?>"><i class="fas fa-info-circle"></i> Help</a>
-                <a class="button update" href="<?php echo get_site_url().'index.php?id=create-ticket' ?>"><i class="fas fa-ticket-alt"></i> Create new ticket</a>
-                <a class="button home" href="<?php echo get_site_url();?>"><i class="fas fa-home"></i> Home</a>
-                
+               <?php if($userOnline  == 1){
+                  ?>
+                    <a class="button home" href="<?php echo get_site_url().'index.php?id=help'?>"><i class="fas fa-info-circle"></i> Help</a>
+                    <a class="button update" href="<?php echo get_site_url().'index.php?id=create' ?>"><i class="fas fa-ticket-alt"></i> Create new ticket</a>
+                    <a class="button home" href="<?php echo get_site_url();?>"><i class="fas fa-home"></i> Home</a>
+                <?php }
+                else{ ?>
+                    <a class="button home" href="<?php echo get_site_url().'index.php?id=help'?>"><i class="fas fa-info-circle"></i> Help</a>
+                    <a class="button home" href="<?php echo get_site_url();?>"><i class="fas fa-home"></i> Home</a>
+                <?php } ?>
+               
             </div>
         </div>
 
