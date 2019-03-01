@@ -12,6 +12,7 @@
                Select the appropriate green 'open' button from any row. 
                </p>
 
+               <h4>Admin only</h4>
                <p><button style='border-radius:5px;background-color:#444'><i class='fas fa-pencil-alt fa-2x'></i></button> <strong>To edit an record</strong>
                
                 Select the grey 'edit' button from any row.

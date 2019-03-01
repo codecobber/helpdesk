@@ -46,10 +46,10 @@
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/style.css" />
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/animate.css" />
 
-    <link rel="shortcut icon" href="https://cdn.sstatic.net/Sites/stackoverflow/img/favicon.ico?v=4f32ecc8f43d">
+    <link rel="shortcut icon" type="image/png" href="<?php get_site_url() ?>favicon.png">
 
 
-    <!-- Google Fonts -->
+    <!-- Google Fonts xxx -->
     <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="<?php get_theme_url(); ?>/css/cssFonts.css" />
 
@@ -137,7 +137,7 @@
 
         <div class="row">
             <div class="small-12 medium-12 columns">
-               <?php if($userOnline  == 1){
+               <?php if(isset($userOnline) && $userOnline == 1){
                   ?>
                     <a class="button home" href="<?php echo get_site_url().'index.php?id=help'?>"><i class="fas fa-info-circle"></i> Help</a>
                     <a class="button update" href="<?php echo get_site_url().'index.php?id=create' ?>"><i class="fas fa-ticket-alt"></i> Create new ticket</a>

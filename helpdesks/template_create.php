@@ -35,25 +35,25 @@
 
                           $checkFlag = 0;
 
-                          if (empty($_POST["datepicker"])) {
+                          if (empty($_POST["datepicker"])|| ctype_space($_POST["datepicker"])) {
                             $datepickerErr = "Date required";
                             $checkFlag =1;
                           } else {
                             $datepicker = test_input($_POST["datepicker"]);
                           }
                           
-                          if (empty($_POST["title"])) {
+                          if (empty($_POST["title"]) || ctype_space($_POST["title"])) {
                             $titleErr = "Title required";
                             $checkFlag =1;
                           } else {
                             $title = test_input($_POST["title"]);
                             // check if name only contains letters and whitespace
-                            if (!preg_match("/^[a-zA-Z ]*$/",$title)) {
+                            if (!preg_match("/[a-zA-Z0-9\s]+/",$title)) {
                               $titleErr = "Only letters and white space allowed"; 
                             }
                           }
                           
-                          if (empty($_POST["ticketno"])) {
+                          if (empty($_POST["ticketno"]) || ctype_space($_POST["ticketno"])) {
                             $ticketnoErr = "Ticket number required";
                             $checkFlag =1;
                           } else {
@@ -64,7 +64,7 @@
                             }
                           }
 
-                          if (empty($_POST["time"])) {
+                          if (empty($_POST["time"]) || ctype_space($_POST["time"])) {
                             $timeErr = "Time required";
                             $checkFlag =1;
                           } else {
@@ -75,7 +75,7 @@
                             }
                           }
 
-                          if (empty($_POST["email"])) {
+                          if (empty($_POST["email"]) || ctype_space($_POST["email"])) {
                             $emailErr = "Email required";
                             $checkFlag =1;
                           } else {
@@ -86,14 +86,14 @@
                             }
                           }
 
-                          if (empty($_POST["impact"])) {
+                          if (empty($_POST["impact"]) || ctype_space($_POST["impact"])) {
                             $impactErr = "Content required";
                             $checkFlag =1;
                           } else {
                             $impact = test_input($_POST["impact"]);
                           }
 
-                          if (empty($_POST["details"])) {
+                          if (empty($_POST["details"]) || ctype_space($_POST["details"])) {
                             $detailsErr = "Content required";
                             $checkFlag =1;
                           } else {
