@@ -4,7 +4,7 @@
         <hr>
         <div class="row" id="helpInfo">
            <div class="medium-12 columns help">
-               <h4>The dashboard.</h4>
+               <h4>The Dashboard.</h4>
                <p>Please start by selecting your P1 or P2 preference from above. Once selected, you will be provided with a list showing each of the current issues.</p>
                
                <h4>The Status.</h4>
