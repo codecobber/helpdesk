@@ -7,6 +7,8 @@ html,body{
 
 
 
+
+
 h1,h2,h3,h4{
     color:#0c4d78;
 }
@@ -20,7 +22,7 @@ h1,h2,h3,h4{
 #main span{color:#607d8b}
 
 body,.off-canvas-content{
-    background-color:#fff;
+    background-color:#F1F1F1;
     color:#444;
 }
 

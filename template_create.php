@@ -128,7 +128,7 @@
 
                             
                             //save file
-                            $filesLoc = "theme/helpdesks/dataSearch/".$_SESSION['pStatus']."/data.json";
+                            $filesLoc = "theme/helpdesk/dataSearch/".$_SESSION['pStatus']."/data.json";
                             $dataFile = file_get_contents($filesLoc);
                             $decodeJson = json_decode($dataFile);
 
