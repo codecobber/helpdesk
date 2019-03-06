@@ -199,7 +199,6 @@ if(!isset($_REQUEST['t'])){
                             //save file
                             $filesLoc2 = "theme/helpdesk/dataSearch/".$_SESSION['pStatus']."/data.json";
                             $dataFile2 = file_get_contents($filesLoc2);
-                            echo $filesLoc2
                             $decodeJson2 = json_decode($dataFile2);
 
                             
