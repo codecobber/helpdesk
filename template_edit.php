@@ -236,7 +236,7 @@ if(!isset($_REQUEST['t'])){
                             $jDataStr2 = json_encode($decodeJson2,JSON_PRETTY_PRINT);
 
                             //store the new data back to file
-                            //file_put_contents($filesLoc2,$jDataStr2);
+                            file_put_contents($filesLoc2,$jDataStr2);
                           }
                       }
 
