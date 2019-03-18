@@ -112,17 +112,7 @@ function  showRows(loc){
                     <div class="data-panel criteria" id="dataRows">
  
                         <h4 id="pSelection"></h4>
-                        <div id="userData" class="panelStyle">
-                            <p>
-                                <span>Date:</span>
-                                <span id="exp_date"></span>
-                                <span>Issue no:</span>
-                                <span id="exp_issueNo"></span>
-                                <span>Raised by:</span>
-                                <span id="exp_raisedBy"></span>
-                            </p>
-                            <p><span>Details:</span></p>
-                        </div>
+                        <div id="userData" class="panelStyle"></div>
                         <div id="deleteNotice"></div>
 
                         
