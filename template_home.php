@@ -2,7 +2,8 @@
 
  include('includes/header.inc.php');
  $_SESSION['pStatus'] = "";
- $_SESSION['gsSitePath'] = get_site_url($echo=false);
+ $_SESSION['gsSitePath'] = $_SERVER['SCRIPT_NAME'];
+
 
  ?>
 
