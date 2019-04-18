@@ -143,7 +143,7 @@
 
                              if($existsFlag == 0){
 
-                              $mymessage = "<p id='success'>Ticket created</p>";
+                              $mymessage = "<p class='success'>Ticket created</p>";
 
                               //save data - create new ticket
                               //stdClass is PHP's generic empty class
